@@ -1,0 +1,22 @@
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.csprojAssemblyReference.cache
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.Properties.Resources.resources
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.csproj.GenerateResource.cache
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.csproj.CoreCompileInputs.cache
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\bin\Debug\Battleship.exe.config
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\bin\Debug\Battleship.exe
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\bin\Debug\Battleship.pdb
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.exe
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.pdb
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.frmMain.resources
+C:\Users\sami.ekinci\source\repos\Battleship - C#\Battleship\obj\Debug\Battleship.frmSetting.resources
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.csprojAssemblyReference.cache
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.exe
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.pdb
+C:\Users\sami.ekinci\source\repos\Battleship\bin\Debug\Battleship.exe.config
+C:\Users\sami.ekinci\source\repos\Battleship\bin\Debug\Battleship.exe
+C:\Users\sami.ekinci\source\repos\Battleship\bin\Debug\Battleship.pdb
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.frmSetting.resources
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.Properties.Resources.resources
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.csproj.GenerateResource.cache
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.csproj.CoreCompileInputs.cache
+C:\Users\sami.ekinci\source\repos\Battleship\obj\Debug\Battleship.frmMain.resources
