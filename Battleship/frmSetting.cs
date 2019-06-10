@@ -40,7 +40,7 @@ namespace Battleship
 
         private void Tb_breite_TextChanged_1(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tb_breite.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(tb_breite.Text, "[^5-9]"))
             {
                 MessageBox.Show("Please enter only numbers.");
                 tb_breite.Text = "";

@@ -43,20 +43,24 @@
             this.lb_punkteg = new System.Windows.Forms.Label();
             this.lb_pointsg = new System.Windows.Forms.Label();
             this.tb_trefferg = new System.Windows.Forms.TextBox();
-            this.gb_setzen = new System.Windows.Forms.GroupBox();
             this.rb_horizontal = new System.Windows.Forms.RadioButton();
             this.rb_vertical = new System.Windows.Forms.RadioButton();
-            this.cb_setzen = new System.Windows.Forms.ComboBox();
             this.btn_start = new System.Windows.Forms.Button();
             this.btn_ship1 = new System.Windows.Forms.Button();
             this.btn_ship2 = new System.Windows.Forms.Button();
-            this.lb_status = new System.Windows.Forms.Label();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lb_s1counter = new System.Windows.Forms.Label();
+            this.rtb_status = new System.Windows.Forms.RichTextBox();
+            this.lb_s2counter = new System.Windows.Forms.Label();
+            this.lb_s1text = new System.Windows.Forms.Label();
+            this.lb_s2text = new System.Windows.Forms.Label();
+            this.btn_ship3 = new System.Windows.Forms.Button();
+            this.lb_s3counter = new System.Windows.Forms.Label();
+            this.lb_s3text = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.gb_infop.SuspendLayout();
             this.gb_infog.SuspendLayout();
-            this.gb_setzen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -67,7 +71,7 @@
             this.beendenToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1018, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,20 +88,20 @@
             // neuesSpielToolStripMenuItem
             // 
             this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
-            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.NeuesSpielToolStripMenuItem_Click);
             // 
             // zurücksetzenToolStripMenuItem
             // 
             this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.zurücksetzenToolStripMenuItem.Text = "Zurücksetzen";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
             // 
@@ -160,7 +164,7 @@
             this.gb_infog.Controls.Add(this.lb_pointsg);
             this.gb_infog.Controls.Add(this.tb_trefferg);
             this.gb_infog.Enabled = false;
-            this.gb_infog.Location = new System.Drawing.Point(810, 374);
+            this.gb_infog.Location = new System.Drawing.Point(776, 374);
             this.gb_infog.Name = "gb_infog";
             this.gb_infog.Size = new System.Drawing.Size(196, 160);
             this.gb_infog.TabIndex = 98;
@@ -194,39 +198,21 @@
             this.tb_trefferg.Size = new System.Drawing.Size(139, 20);
             this.tb_trefferg.TabIndex = 1;
             // 
-            // gb_setzen
-            // 
-            this.gb_setzen.Controls.Add(this.PictureBox1);
-            this.gb_setzen.Controls.Add(this.rb_horizontal);
-            this.gb_setzen.Controls.Add(this.rb_vertical);
-            this.gb_setzen.Controls.Add(this.cb_setzen);
-            this.gb_setzen.Enabled = false;
-            this.gb_setzen.Location = new System.Drawing.Point(416, 374);
-            this.gb_setzen.Name = "gb_setzen";
-            this.gb_setzen.Size = new System.Drawing.Size(200, 160);
-            this.gb_setzen.TabIndex = 101;
-            this.gb_setzen.TabStop = false;
-            this.gb_setzen.Text = "Schiffe setzen";
-            // 
             // rb_horizontal
             // 
-            this.rb_horizontal.AutoCheck = false;
             this.rb_horizontal.AutoSize = true;
-            this.rb_horizontal.Location = new System.Drawing.Point(15, 119);
+            this.rb_horizontal.Location = new System.Drawing.Point(508, 181);
             this.rb_horizontal.Name = "rb_horizontal";
             this.rb_horizontal.Size = new System.Drawing.Size(72, 17);
             this.rb_horizontal.TabIndex = 103;
-            this.rb_horizontal.TabStop = true;
             this.rb_horizontal.Text = "Horizontal";
             this.rb_horizontal.UseVisualStyleBackColor = true;
-            this.rb_horizontal.CheckedChanged += new System.EventHandler(this.Rb_horizontal_CheckedChanged);
             // 
             // rb_vertical
             // 
-            this.rb_vertical.AutoCheck = false;
             this.rb_vertical.AutoSize = true;
             this.rb_vertical.Checked = true;
-            this.rb_vertical.Location = new System.Drawing.Point(15, 96);
+            this.rb_vertical.Location = new System.Drawing.Point(435, 181);
             this.rb_vertical.Name = "rb_vertical";
             this.rb_vertical.Size = new System.Drawing.Size(60, 17);
             this.rb_vertical.TabIndex = 102;
@@ -234,92 +220,155 @@
             this.rb_vertical.Text = "Vertikal";
             this.rb_vertical.UseVisualStyleBackColor = true;
             // 
-            // cb_setzen
-            // 
-            this.cb_setzen.FormattingEnabled = true;
-            this.cb_setzen.Items.AddRange(new object[] {
-            "Boot 1L"});
-            this.cb_setzen.Location = new System.Drawing.Point(6, 28);
-            this.cb_setzen.Name = "cb_setzen";
-            this.cb_setzen.Size = new System.Drawing.Size(188, 21);
-            this.cb_setzen.TabIndex = 101;
-            this.cb_setzen.Text = "Schiff auswählen...";
-            // 
             // btn_start
             // 
             this.btn_start.Enabled = false;
-            this.btn_start.Location = new System.Drawing.Point(493, 311);
+            this.btn_start.Location = new System.Drawing.Point(460, 336);
             this.btn_start.Name = "btn_start";
-            this.btn_start.Size = new System.Drawing.Size(75, 23);
+            this.btn_start.Size = new System.Drawing.Size(80, 23);
             this.btn_start.TabIndex = 102;
             this.btn_start.Text = "Spiel starten";
             this.btn_start.UseVisualStyleBackColor = true;
             // 
             // btn_ship1
             // 
-            this.btn_ship1.Location = new System.Drawing.Point(431, 186);
+            this.btn_ship1.Location = new System.Drawing.Point(435, 219);
             this.btn_ship1.Name = "btn_ship1";
-            this.btn_ship1.Size = new System.Drawing.Size(75, 23);
+            this.btn_ship1.Size = new System.Drawing.Size(60, 23);
             this.btn_ship1.TabIndex = 103;
-            this.btn_ship1.Text = "button1";
+            this.btn_ship1.Text = "1. Schiff";
             this.btn_ship1.UseVisualStyleBackColor = true;
+            this.btn_ship1.Click += new System.EventHandler(this.Btn_ship1_Click);
             // 
             // btn_ship2
             // 
-            this.btn_ship2.Location = new System.Drawing.Point(431, 216);
+            this.btn_ship2.Location = new System.Drawing.Point(435, 248);
             this.btn_ship2.Name = "btn_ship2";
-            this.btn_ship2.Size = new System.Drawing.Size(75, 23);
+            this.btn_ship2.Size = new System.Drawing.Size(60, 23);
             this.btn_ship2.TabIndex = 104;
-            this.btn_ship2.Text = "button2";
+            this.btn_ship2.Text = "2. Schiff";
             this.btn_ship2.UseVisualStyleBackColor = true;
             this.btn_ship2.Click += new System.EventHandler(this.Btn_ship2_Click);
             // 
-            // lb_status
+            // lb_s1counter
             // 
-            this.lb_status.AutoSize = true;
-            this.lb_status.Location = new System.Drawing.Point(440, 287);
-            this.lb_status.Name = "lb_status";
-            this.lb_status.Size = new System.Drawing.Size(37, 13);
-            this.lb_status.TabIndex = 105;
-            this.lb_status.Text = "Status";
+            this.lb_s1counter.AutoSize = true;
+            this.lb_s1counter.Location = new System.Drawing.Point(505, 224);
+            this.lb_s1counter.Name = "lb_s1counter";
+            this.lb_s1counter.Size = new System.Drawing.Size(12, 13);
+            this.lb_s1counter.TabIndex = 106;
+            this.lb_s1counter.Text = "x";
             // 
-            // PictureBox1
+            // rtb_status
             // 
-            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.PictureBox1.Image = global::Battleship.Properties.Resources.boat;
-            this.PictureBox1.Location = new System.Drawing.Point(111, 82);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(83, 72);
-            this.PictureBox1.TabIndex = 104;
-            this.PictureBox1.TabStop = false;
+            this.rtb_status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtb_status.Location = new System.Drawing.Point(350, 40);
+            this.rtb_status.Name = "rtb_status";
+            this.rtb_status.ReadOnly = true;
+            this.rtb_status.Size = new System.Drawing.Size(300, 38);
+            this.rtb_status.TabIndex = 107;
+            this.rtb_status.TabStop = false;
+            this.rtb_status.Text = "";
+            // 
+            // lb_s2counter
+            // 
+            this.lb_s2counter.AutoSize = true;
+            this.lb_s2counter.Location = new System.Drawing.Point(505, 253);
+            this.lb_s2counter.Name = "lb_s2counter";
+            this.lb_s2counter.Size = new System.Drawing.Size(12, 13);
+            this.lb_s2counter.TabIndex = 108;
+            this.lb_s2counter.Text = "x";
+            // 
+            // lb_s1text
+            // 
+            this.lb_s1text.AutoSize = true;
+            this.lb_s1text.Location = new System.Drawing.Point(525, 224);
+            this.lb_s1text.Name = "lb_s1text";
+            this.lb_s1text.Size = new System.Drawing.Size(52, 13);
+            this.lb_s1text.TabIndex = 109;
+            this.lb_s1text.Text = "verfügbar";
+            // 
+            // lb_s2text
+            // 
+            this.lb_s2text.AutoSize = true;
+            this.lb_s2text.Location = new System.Drawing.Point(525, 253);
+            this.lb_s2text.Name = "lb_s2text";
+            this.lb_s2text.Size = new System.Drawing.Size(52, 13);
+            this.lb_s2text.TabIndex = 110;
+            this.lb_s2text.Text = "verfügbar";
+            // 
+            // btn_ship3
+            // 
+            this.btn_ship3.Location = new System.Drawing.Point(435, 277);
+            this.btn_ship3.Name = "btn_ship3";
+            this.btn_ship3.Size = new System.Drawing.Size(60, 23);
+            this.btn_ship3.TabIndex = 111;
+            this.btn_ship3.Text = "3. Schiff";
+            this.btn_ship3.UseVisualStyleBackColor = true;
+            this.btn_ship3.Click += new System.EventHandler(this.Btn_ship3_Click);
+            // 
+            // lb_s3counter
+            // 
+            this.lb_s3counter.AutoSize = true;
+            this.lb_s3counter.Location = new System.Drawing.Point(505, 282);
+            this.lb_s3counter.Name = "lb_s3counter";
+            this.lb_s3counter.Size = new System.Drawing.Size(12, 13);
+            this.lb_s3counter.TabIndex = 112;
+            this.lb_s3counter.Text = "x";
+            // 
+            // lb_s3text
+            // 
+            this.lb_s3text.AutoSize = true;
+            this.lb_s3text.Location = new System.Drawing.Point(525, 282);
+            this.lb_s3text.Name = "lb_s3text";
+            this.lb_s3text.Size = new System.Drawing.Size(52, 13);
+            this.lb_s3text.TabIndex = 113;
+            this.lb_s3text.Text = "verfügbar";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(440, 94);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 114;
+            this.pictureBox1.TabStop = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 545);
-            this.Controls.Add(this.lb_status);
+            this.ClientSize = new System.Drawing.Size(984, 545);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lb_s3text);
+            this.Controls.Add(this.rb_horizontal);
+            this.Controls.Add(this.lb_s3counter);
+            this.Controls.Add(this.rb_vertical);
+            this.Controls.Add(this.btn_ship3);
+            this.Controls.Add(this.lb_s2text);
+            this.Controls.Add(this.lb_s1text);
+            this.Controls.Add(this.lb_s2counter);
+            this.Controls.Add(this.rtb_status);
+            this.Controls.Add(this.lb_s1counter);
             this.Controls.Add(this.btn_ship2);
             this.Controls.Add(this.btn_ship1);
             this.Controls.Add(this.btn_start);
-            this.Controls.Add(this.gb_setzen);
             this.Controls.Add(this.gb_infog);
             this.Controls.Add(this.gb_infop);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.RightToLeftLayout = true;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Battleship";
-            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gb_infop.ResumeLayout(false);
             this.gb_infop.PerformLayout();
             this.gb_infog.ResumeLayout(false);
             this.gb_infog.PerformLayout();
-            this.gb_setzen.ResumeLayout(false);
-            this.gb_setzen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,15 +391,20 @@
         internal System.Windows.Forms.Label lb_punkteg;
         internal System.Windows.Forms.Label lb_pointsg;
         internal System.Windows.Forms.TextBox tb_trefferg;
-        internal System.Windows.Forms.GroupBox gb_setzen;
-        internal System.Windows.Forms.PictureBox PictureBox1;
         internal System.Windows.Forms.RadioButton rb_horizontal;
         internal System.Windows.Forms.RadioButton rb_vertical;
-        internal System.Windows.Forms.ComboBox cb_setzen;
         internal System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.Button btn_ship1;
         private System.Windows.Forms.Button btn_ship2;
-        private System.Windows.Forms.Label lb_status;
+        private System.Windows.Forms.Label lb_s1counter;
+        private System.Windows.Forms.RichTextBox rtb_status;
+        private System.Windows.Forms.Label lb_s2counter;
+        private System.Windows.Forms.Label lb_s1text;
+        private System.Windows.Forms.Label lb_s2text;
+        private System.Windows.Forms.Button btn_ship3;
+        private System.Windows.Forms.Label lb_s3counter;
+        private System.Windows.Forms.Label lb_s3text;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
