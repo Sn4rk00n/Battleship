@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neuesSpielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +56,7 @@
             this.btn_ship3 = new System.Windows.Forms.Button();
             this.lb_s3counter = new System.Windows.Forms.Label();
             this.lb_s3text = new System.Windows.Forms.Label();
+            this.t_zug = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.gb_infop.SuspendLayout();
             this.gb_infog.SuspendLayout();
@@ -84,14 +86,14 @@
             // neuesSpielToolStripMenuItem
             // 
             this.neuesSpielToolStripMenuItem.Name = "neuesSpielToolStripMenuItem";
-            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.NeuesSpielToolStripMenuItem_Click);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
             // 
@@ -256,7 +258,7 @@
             this.rtb_status.Location = new System.Drawing.Point(350, 40);
             this.rtb_status.Name = "rtb_status";
             this.rtb_status.ReadOnly = true;
-            this.rtb_status.Size = new System.Drawing.Size(300, 39);
+            this.rtb_status.Size = new System.Drawing.Size(300, 135);
             this.rtb_status.TabIndex = 107;
             this.rtb_status.TabStop = false;
             this.rtb_status.Text = "";
@@ -315,6 +317,11 @@
             this.lb_s3text.Size = new System.Drawing.Size(52, 13);
             this.lb_s3text.TabIndex = 113;
             this.lb_s3text.Text = "verfügbar";
+            // 
+            // t_zug
+            // 
+            this.t_zug.Interval = 1000;
+            this.t_zug.Tick += new System.EventHandler(this.T_zug_Tick);
             // 
             // frmMain
             // 
@@ -385,6 +392,7 @@
         private System.Windows.Forms.Button btn_ship3;
         private System.Windows.Forms.Label lb_s3counter;
         private System.Windows.Forms.Label lb_s3text;
+        private System.Windows.Forms.Timer t_zug;
     }
 }
 

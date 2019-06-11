@@ -19,7 +19,7 @@ namespace Battleship
 
     public partial class frmMain : Form
     {
-
+        public int start_zug = 0;
         // Globale Startparameter
         public int[] se11;
         public int[] se12;
@@ -48,6 +48,8 @@ namespace Battleship
 
         public int gameState = 0;   //GameState: 0=Setzen 1=Spiel starten
 
+        public int[,] alrdyShot;
+
         //Difinitions Integer für Feld- Position, Größe und Erscheinungsbild
         public int fieldtop = 50;
         public int fieldleft = 50;
@@ -63,7 +65,7 @@ namespace Battleship
 
         //Variablen für max/min X/Y Koordinate
         public int xmin = 50;
-        public int xmax;
+        public int xmax = 50;
         public int ymin = 50;
         public int ymax;
 
@@ -117,6 +119,7 @@ namespace Battleship
 
             // Anzahl Felder mit Feldgröße multiplizieren
             i = i * fieldsize + fieldtop;
+            alrdyShot = new int[i, i];
 
             // Initiallisierung des 2D Arrays für die Felder
             pbe = new PictureBox[i, i];
@@ -124,7 +127,7 @@ namespace Battleship
 
             //Zweifach verstrickte FOR-Schleife für die Erstellung der Felder mit ihren jeweiligen Events(Funktionen) und Eigenschaften
             for (int y = fieldtop; y <= i - fieldsize; y += fieldsize)
-            {
+            {       //y= 50; 50 <= 125, 50 += 25                5*5
                 for (int x = fieldleft; x <= i - fieldsize; x += fieldsize)
                 {
                     pbe[x, y] = new PictureBox();
@@ -140,6 +143,7 @@ namespace Battleship
                     this.Controls.Add(pbe[x, y]);
                     xmax = x;
                     ymax = y;
+                    alrdyShot[x, y] = 0;
 
                     pbg[x, y] = new PictureBox();
                     pbg[x, y].Name = "picboxg_" + x.ToString() + "-" + y.ToString();
@@ -163,11 +167,11 @@ namespace Battleship
             {
                 case 5:
                     s1Count = 3;
-                    s11 = new int[2];
-                    s12 = new int[2];
-                    s13 = new int[2];
+                    s11 = new int[3];
+                    s12 = new int[3];
+                    s13 = new int[3];
                     s2Count = 1;
-                    s21 = new int[4];
+                    s21 = new int[6];
                     s3Count = 0;
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
@@ -176,12 +180,12 @@ namespace Battleship
                     break;
                 case 6:
                     s1Count = 3;
-                    s11 = new int[2];
-                    s12 = new int[2];
-                    s13 = new int[2];
+                    s11 = new int[3];
+                    s12 = new int[3];
+                    s13 = new int[3];
                     s2Count = 2;
-                    s21 = new int[4];
-                    s22 = new int[4];
+                    s21 = new int[6];
+                    s22 = new int[6];
                     s3Count = 0;
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
@@ -190,15 +194,15 @@ namespace Battleship
                     break;
                 case 7:
                     s1Count = 4;
-                    s11 = new int[2];
-                    s12 = new int[2];
-                    s13 = new int[2];
-                    s14 = new int[2];
+                    s11 = new int[3];
+                    s12 = new int[3];
+                    s13 = new int[3];
+                    s14 = new int[3];
                     s2Count = 2;
-                    s21 = new int[4];
-                    s22 = new int[4];
+                    s21 = new int[6];
+                    s22 = new int[6];
                     s3Count = 1;
-                    s31 = new int[6];
+                    s31 = new int[9];
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
@@ -206,16 +210,16 @@ namespace Battleship
                     break;
                 case 8:
                     s1Count = 4;
-                    s11 = new int[2];
-                    s12 = new int[2];
-                    s13 = new int[2];
-                    s14 = new int[2];
+                    s11 = new int[3];
+                    s12 = new int[3];
+                    s13 = new int[3];
+                    s14 = new int[3];
                     s2Count = 3;
-                    s21 = new int[4];
-                    s22 = new int[4];
-                    s23 = new int[4];
+                    s21 = new int[6];
+                    s22 = new int[6];
+                    s23 = new int[6];
                     s3Count = 1;
-                    s31 = new int[6];
+                    s31 = new int[9];
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
@@ -223,17 +227,17 @@ namespace Battleship
                     break;
                 case 9:
                     s1Count = 4;
-                    s11 = new int[2];
-                    s12 = new int[2];
-                    s13 = new int[2];
-                    s14 = new int[2];
+                    s11 = new int[3];
+                    s12 = new int[3];
+                    s13 = new int[3];
+                    s14 = new int[3];
                     s2Count = 3;
-                    s21 = new int[4];
-                    s22 = new int[4];
-                    s23 = new int[4];
+                    s21 = new int[6];
+                    s22 = new int[6];
+                    s23 = new int[6];
                     s3Count = 2;
-                    s31 = new int[6];
-                    s32 = new int[6];
+                    s31 = new int[9];
+                    s32 = new int[9];
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
@@ -644,6 +648,7 @@ namespace Battleship
                 if (regexItem.IsMatch(name))
                 {
                     rtb_status.Text = "Auf dieses Feld kannst du nicht schießen.";
+                    start_zug = 1;
                 }
             }
         }
@@ -652,8 +657,148 @@ namespace Battleship
         {
             switch (s1Count)
             {
+                case 1:
+                    se11 = new int[3];
+                    se11[0] = x;
+                    se11[1] = y;
+                    se11[2] = 1; //Schiff da - nicht versenkt 0=versenkt 1=vorhanden
+                    break;
+                case 2:
+                    se12 = new int[3];
+                    se12[0] = x;
+                    se12[1] = y;
+                    se12[2] = 1;
+                    break;
+                case 3:
+                    se13 = new int[3];
+                    se13[0] = x;
+                    se13[1] = y;
+                    se13[2] = 1;
+                    break;
                 case 4:
-                    se11 = new int[2];
+                    se14 = new int[3];
+                    se14[0] = x;
+                    se14[1] = y;
+                    se14[2] = 1;
+                    break;
+            }
+
+            switch (s2Count)
+            {
+                case 1:
+                    se21 = new int[6];
+                    if (rb_horizontal.Checked)
+                    {
+                        se21[0] = x;
+                        se21[1] = y;
+                        se21[2] = x + fieldsize;
+                        se21[3] = y;
+                    }
+                    else if (rb_vertical.Checked)
+                    {
+                        se21[0] = x;
+                        se21[1] = y;
+                        se21[2] = x;
+                        se21[3] = y + fieldsize;
+                    }
+                    se21[4] = 1;
+                    se21[5] = 1;
+                    break;
+                case 2:
+                    se22 = new int[6];
+                    if (rb_horizontal.Checked)
+                    {
+                        se22[0] = x;
+                        se22[1] = y;
+                        se22[2] = x + fieldsize;
+                        se22[3] = y;
+                        se22[4] = 0;
+                    }
+                    else if (rb_vertical.Checked)
+                    {
+                        se22[0] = x;
+                        se22[1] = y;
+                        se22[2] = x;
+                        se22[3] = y + fieldsize;
+                        se22[4] = 0;
+                    }
+                    se22[4] = 1;
+                    se22[5] = 1;
+                    break;
+                case 3:
+                    se23 = new int[6];
+                    if (rb_horizontal.Checked)
+                    {
+                        se23[0] = x;
+                        se23[1] = y;
+                        se23[2] = x + fieldsize;
+                        se23[3] = y;
+                        se23[4] = 0;
+                    }
+                    else if (rb_vertical.Checked)
+                    {
+                        se23[0] = x;
+                        se23[1] = y;
+                        se23[2] = x;
+                        se23[3] = y + fieldsize;
+                        se23[4] = 0;
+                    }
+                    se23[4] = 1;
+                    se23[5] = 1;
+                    break;
+            }
+
+            switch (s3Count)
+            {
+                case 1:
+                    se31 = new int[9];
+                    if (rb_horizontal.Checked)
+                    {
+                        se31[0] = x;
+                        se31[1] = y;
+                        se31[2] = x + fieldsize;
+                        se31[3] = y;
+                        se31[4] = x + (fieldsize * 2);
+                        se31[5] = y;
+                    }
+                    else if (rb_vertical.Checked)
+                    {
+                        se31[0] = x;
+                        se31[1] = y;
+                        se31[2] = x;
+                        se31[3] = y + fieldsize;
+                        se31[4] = x;
+                        se31[5] = y + (fieldsize * 2);
+                    }
+                    se31[6] = 1;
+                    se31[7] = 1;
+                    se31[8] = 1;
+                    break;
+                case 2:
+                    se32 = new int[9];
+                    if (rb_horizontal.Checked)
+                    {
+                        se32[0] = x;
+                        se32[1] = y;
+                        se32[2] = x + fieldsize;
+                        se32[3] = y;
+                        se32[4] = x + (fieldsize * 2);
+                        se32[5] = y;
+                        se32[6] = 0;
+                    }
+                    else if (rb_vertical.Checked)
+                    {
+                        se32[0] = x;
+                        se32[1] = y;
+                        se32[2] = x;
+                        se32[3] = y + fieldsize;
+                        se32[4] = x;
+                        se32[5] = y + (fieldsize * 2);
+                        se32[6] = 0;
+                    }
+                    se32[6] = 1;
+                    se32[7] = 1;
+                    se32[8] = 1;
                     break;
             }
         }
@@ -699,24 +844,28 @@ namespace Battleship
                     case 1:
                         s11[0] = numx;
                         s11[1] = numy;
+                        s11[2] = 1;
                         pbg[s11[0], s11[1]].BackColor = Color.DodgerBlue;
                         check = 0;
                         break;
                     case 2:
                         s12[0] = numx;
                         s12[1] = numy;
+                        s12[2] = 1;
                         pbg[s12[0], s12[1]].BackColor = Color.DodgerBlue;
                         check = 0;
                         break;
                     case 3:
                         s13[0] = numx;
                         s13[1] = numy;
+                        s13[2] = 1;
                         pbg[s13[0], s13[1]].BackColor = Color.DodgerBlue;
                         check = 0;
                         break;
                     case 4:
                         s14[0] = numx;
                         s14[1] = numy;
+                        s14[2] = 1;
                         pbg[s14[0], s14[1]].BackColor = Color.DodgerBlue;
                         check = 0;
                         break;
@@ -724,9 +873,7 @@ namespace Battleship
                     default:
                         check = 0;
                         break;
-
                 }
-
                 Ship1Count--;
             }
 
@@ -804,6 +951,8 @@ namespace Battleship
                             s21[2] = numx;
                             s21[3] = numy + fieldsize;
                         }
+                        s21[4] = 1; //Erstes Feld
+                        s21[5] = 1; //Zweites Feld
                         pbg[s21[0], s21[1]].BackColor = Color.DodgerBlue;
                         pbg[s21[2], s21[3]].BackColor = Color.DodgerBlue;
                         check = 0;
@@ -824,6 +973,8 @@ namespace Battleship
                             s22[2] = numx;
                             s22[3] = numy + fieldsize;
                         }
+                        s22[4] = 1;
+                        s22[5] = 1;
                         pbg[s22[0], s22[1]].BackColor = Color.DodgerBlue;
                         pbg[s22[2], s22[3]].BackColor = Color.DodgerBlue;
                         check = 0;
@@ -844,6 +995,8 @@ namespace Battleship
                             s23[2] = numx;
                             s23[3] = numy + fieldsize;
                         }
+                        s23[4] = 1;
+                        s23[5] = 1;
                         pbg[s23[0], s23[1]].BackColor = Color.DodgerBlue;
                         pbg[s23[2], s23[3]].BackColor = Color.DodgerBlue;
                         check = 0;
@@ -885,10 +1038,7 @@ namespace Battleship
 
                             }
                             else { }
-
-
                         }
-
 
                         else if (vh == 1)//vertical
                         {
@@ -939,6 +1089,9 @@ namespace Battleship
                             s31[4] = numx;
                             s31[5] = numy + (fieldsize * 2);
                         }
+                        s31[6] = 1;
+                        s31[7] = 1;
+                        s31[8] = 1;
                         pbg[s31[0], s31[1]].BackColor = Color.DodgerBlue;
                         pbg[s31[2], s31[3]].BackColor = Color.DodgerBlue;
                         pbg[s31[4], s31[5]].BackColor = Color.DodgerBlue;
@@ -963,6 +1116,9 @@ namespace Battleship
                             s32[4] = numx;
                             s32[5] = numy + (fieldsize * 2);
                         }
+                        s32[6] = 1;
+                        s32[7] = 1;
+                        s32[8] = 1;
                         pbg[s32[0], s32[1]].BackColor = Color.DodgerBlue;
                         pbg[s32[2], s32[3]].BackColor = Color.DodgerBlue;
                         pbg[s32[4], s32[5]].BackColor = Color.DodgerBlue;
@@ -996,7 +1152,7 @@ namespace Battleship
             switch (lenght)
             {
                 case 1:
-                    check = fieldCheck(x, y);
+                    check = fieldCheck(x, y,0);
 
                     if (check == 1)
                     {
@@ -1004,38 +1160,38 @@ namespace Battleship
                     }
                     break;
                 case 2:
-                    check = fieldCheck(x, y);
+                    check = fieldCheck(x, y,0);
                     if (check == 1)
                     {
                         return 1;
                     }
                     else if (rb_horizontal.Checked && check == 0)
                     {
-                        check = fieldCheck(x + fieldsize, y);
+                        check = fieldCheck(x + fieldsize, y,0);
                         if (check == 1) { return 1; }
                         else { return 0; }
                     }
 
                     else if (rb_vertical.Checked && check == 0)
                     {
-                        check = fieldCheck(x, y + fieldsize);
+                        check = fieldCheck(x, y + fieldsize,0);
                         if (check == 1) { return 1; }
                         else { return 0; }
                     }
                     break;
                 case 3:
-                    check = fieldCheck(x, y);
+                    check = fieldCheck(x, y,0);
                     if (check == 1)
                     {
                         return 1;
                     }
                     else if (rb_horizontal.Checked && check == 0)
                     {
-                        check = fieldCheck(x + fieldsize, y);
+                        check = fieldCheck(x + fieldsize, y,0);
                         if (check == 1) { return 1; }
                         else if (check == 0)
                         {
-                            check = fieldCheck(x + (2 * fieldsize), y);
+                            check = fieldCheck(x + (2 * fieldsize), y,0);
                             if (check == 1) { return 1; }
                             else { return 0; }
                         }
@@ -1043,11 +1199,11 @@ namespace Battleship
                     }
                     else if (rb_vertical.Checked && check == 0)
                     {
-                        check = fieldCheck(x, y + fieldsize);
+                        check = fieldCheck(x, y + fieldsize,0);
                         if (check == 1) { return 1; }
                         else if (check == 0)
                         {
-                            check = fieldCheck(x, y + (2 * fieldsize));
+                            check = fieldCheck(x, y + (2 * fieldsize),0);
                             if (check == 1) { return 1; }
                             else { return 0; }
                         }
@@ -1127,11 +1283,11 @@ namespace Battleship
         }
 
 
-        private int fieldCheck(int x, int y)
+        private int fieldCheck(int x, int y,int hit)
         {
             if (x - fieldsize < xmin && y - fieldsize < ymin) //Ecke obenlinks
             {
-                if (pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
+                if (pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray && hit != 1)
                 {
                     return 1;
                 }
@@ -1322,26 +1478,20 @@ namespace Battleship
         {
             gameState = 1;
 
-            Random random = new Random();
-            int start_zug = random.Next(2);
-
-            while(start_zug == 0 || start_zug == 1)
-            { 
-                if (start_zug == 0)
-                {
-                    //func spieler_zug();
-                }
-                else if (start_zug == 1)
-                {
-                    computer_zug();
-                }
-            }
+            //Random random = new Random();
+            //start_zug = random.Next(2);
+            start_zug = 0;
+            t_zug.Enabled = true;
 
         }
 
         private int computer_zug()
         {
             int comp_zug = 1;
+            int oldx;
+            int oldy;
+            double rückgabe;
+            int shot;
             Random random = new Random();
 
             while (comp_zug == 1)
@@ -1349,32 +1499,265 @@ namespace Battleship
                 int schuss_x = random.Next(fGr) * fieldsize + fieldtop;                       //Nimmt eine Randomzahl anhand der Größe des Spielfeldes 
                 int schuss_y = random.Next(fGr) * fieldsize + fieldtop;                       //so wird bestimmt wo hingeschossen wird
 
-                if (pbe[schuss_x, schuss_y].BackColor == Color.DodgerBlue)        //Kein Treffer
+                shot = alreadyShot(schuss_x, schuss_y);
+                if (shot == 0)
                 {
-                    comp_zug = 0;  
+                    if (pbe[schuss_x, schuss_y].BackColor == Color.DodgerBlue)        //Kein Treffer
+                    {
+                        alrdyShot[schuss_x, schuss_y] = 1; //Registrieung, dass in dieses Feld geschossen wurde
+                        comp_zug = 0;
+                    }
+                    else if (pbe[schuss_x, schuss_y].BackColor == Color.Gray)   //Treffer
+                    {
+                        rückgabe = checkArray(schuss_x, schuss_y, 1);
+
+                        /*switch (rückgabe)
+                        {
+                            case 11:
+                                tb_trefferg.Text = "1er Schiff versenkt";
+                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                                break;
+                            case 12:
+                                tb_trefferg.Text = "1er Schiff versenkt";
+                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                                break;
+                            case 13:
+                                tb_trefferg.Text = "1er Schiff versenkt";
+                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                                break;
+                            case 14:
+                                tb_trefferg.Text = "1er Schiff versenkt";
+                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                                break;
+                            case 21.1-31.3:
+                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                                oldx = schuss_x;
+                                oldy = schuss_y;
+                                rückgabe = checkArray(schuss_x, schuss_y, 2);
+                                break;
+                        }
+                        */
+                        if (rückgabe >= 11 && rückgabe <= 14)
+                        {
+                            tb_trefferg.Text = "1er Schiff versenkt";
+                            pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                        }
+                        else if (rückgabe >= 21.1 && rückgabe <= 31.3)
+                        {
+                            pbe[schuss_x, schuss_y].BackColor = Color.Red;
+                            oldx = schuss_x;
+                            oldy = schuss_y;
+                            shot = fieldCheck(schuss_x, schuss_y, 1);
+                            rückgabe = checkArray(schuss_x, schuss_y, 2);
+                        }
+                    }
                 }
-                else if (pbe[schuss_x, schuss_y].BackColor == Color.Gray)   //Treffer
-                {
-                    Arraywert des getroffenen Schiffes ändern                   //Überprüfen welches Schiff getroffen wurde
-
-
-                    if (schiff_2er[2] == 1, 0 || schiff_2er[2] = 0, 1)	//Schiff der Größe 2 getroffen und Funktionsaufruf
-			        {   //pbe[100,100 - 100,125] se21[2] = 1,1 | se21[0]= 0 -> pbe[100,100] - se21[1] -> pbe[100,125]
-                        func 2er_schiff_getroffen();
-                    }
-
-                    else if (schiff_3er[3] == 1, 1, 0 || schiff_3er[3] == 1, 0, 1 || schiff_3er[3] == 0, 1, 1 || schiff_3er[3] == 1, 0, 0 || schiff_3er[3] == 0, 1, 0 || schiff_3er[3] == 0, 0, 1 )
-			        {
-                        func 3er_schiff_getroffen();                //Schiff der Größe 3 getroffen und Funktionsaufruf
-                    }
-
-                    else if (schiff_1er[1] == 0 || schiff_2er[2] == 0, 0 || schiff_3er[3] == 0, 0, 0 )
-			        {
-                        func schiff_versenkt();                         // Ein Schiff wurde versenkt
-                    }
-                }
-               
+                else if (shot == 1) { rtb_status.Text = rtb_status.Text + "\nBereits geschossen"; }
+                
             }
+            return 0;
+        }
+
+        private int alreadyShot(int x,int y)
+        {
+            for (int i = fieldtop;i <= ymax - fieldsize; i += fieldsize)
+            {
+                for(int j = fieldtop; j <= xmax; j += fieldsize)
+                {
+                    if (alrdyShot[j, i] == alrdyShot[x, y] && alrdyShot[x, y] == 0)
+                    {
+                        alrdyShot[x, y] = 1;
+                        return 0;
+                    }
+                    else { return 1; }
+                }
+            }
+            return 0;
+        }
+
+        private double checkArray(int x,int y, int hits) //hits: 1=treffer 2=versenkt?
+        {
+            if (hits == 1)
+            {
+                if (x == se11[0] && y == se11[1]) //s11
+                {
+                    se11[2] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 11;
+                }
+                else if(x == se12[0] && y == se12[1]) //s12
+                {
+                    se12[2] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 12;
+                }
+                else if (x == se13[0] && y == se13[1]) //s13
+                {
+                    se13[2] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 13;
+                }
+
+                else if (x == se21[0] && y == se21[1]) //s21
+                {
+                    se21[4] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 21.1;
+                }
+                else if (x == se21[2] && y == se21[3]) //s21
+                {
+                    se21[5] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 21.2;
+                }
+                else if (x == se22[0] && y == se22[1] && fGr >= 6) //s22
+                {
+                    se22[4] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 22.1;
+                }
+                else if (x == se22[2] && y == se22[3] && fGr >= 6) //s22
+                {
+                    se22[5] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 22.2;
+                }
+
+                else if (x == se14[0] && y == se14[1] && fGr >= 7) //s14
+                {
+                    se14[2] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 14;
+                }
+
+                else if (x == se31[0] && y == se31[1] && fGr >= 7) //s31
+                {
+                    se31[6] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 31.1;
+                }
+                else if (x == se31[2] && y == se31[3] && fGr >= 7) //s31
+                {
+                    se31[7] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 31.2;
+                }
+                else if (x == se31[4] && y == se31[5] && fGr >= 7) //s31
+                {
+                    se31[8] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 31.3;
+                }
+
+                else if (x == se23[0] && y == se23[1] && fGr >= 8) //s23
+                {
+                    se23[4] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 23.1;
+                }
+                else if (x == se23[2] && y == se23[3] && fGr >= 8) //s23
+                {
+                    se23[5] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 23.2;
+                }
+                else if (x == se32[0] && y == se32[1] && fGr == 9) //s32
+                {
+                    se32[6] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 32.1;
+                }
+                else if (x == se32[2] && y == se32[3] && fGr == 9) //s32
+                {
+                    se32[7] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 32.2;
+                }
+                else if (x == se32[4] && y == se32[5] && fGr == 9) //s32
+                {
+                    se32[8] = 0;
+                    alrdyShot[x, y] = 1;
+                    return 32.3;
+                }
+            }
+            else if (hits == 2) // Abfrage für 2er/3er Schiffe ob versunken
+            {
+                switch (fGr)
+                {
+                    case 5:
+                        if (se21[4] == 0 && s21[5] == 0)
+                        {
+                            tb_trefferg.Text = "Schiff 2.1 versenkt";
+                        }
+                        break;
+                    case 6:
+                        if (se21[4] == 0 && s21[5] == 0)
+                        {
+                            tb_trefferg.Text = "Schiff 2.1 versenkt";
+                        }
+                        else if (se22[4] == 0 && se22[5] == 0 && fGr >= 6)
+                        {
+                            tb_trefferg.Text = "Schiff 2.2 versenkt";
+                        }
+                        break;
+                    case 7:
+                        if (se21[4] == 0 && s21[5] == 0)
+                        {
+                            tb_trefferg.Text = "Schiff 2.1 versenkt";
+                        }
+                        else if (se22[4] == 0 && se22[5] == 0 && fGr >= 6)
+                        {
+                            tb_trefferg.Text = "Schiff 2.2 versenkt";
+                        }
+                        else if (se31[6] == 0 && se31[7] == 0 && se31[8] == 0 && fGr >= 7)
+                        {
+                            tb_trefferg.Text = "Schiff 3.1 versenkt";
+                        }
+                        break;
+                    case 8:
+                        if (se21[4] == 0 && s21[5] == 0)
+                        {
+                            tb_trefferg.Text = "Schiff 2.1 versenkt";
+                        }
+                        else if (se22[4] == 0 && se22[5] == 0 && fGr >= 6)
+                        {
+                            tb_trefferg.Text = "Schiff 2.2 versenkt";
+                        }
+                        else if (se31[6] == 0 && se31[7] == 0 && se31[8] == 0 && fGr >= 7)
+                        {
+                            tb_trefferg.Text = "Schiff 3.1 versenkt";
+                        }
+                        else if (se23[4] == 0 && se23[5] == 0 && fGr >= 8)
+                        {
+                            tb_trefferg.Text = "Schiff 2.3 versenkt";
+                        }
+                        break;
+                    case 9:
+                        if (se21[4] == 0 && s21[5] == 0)
+                        {
+                            tb_trefferg.Text = "Schiff 2.1 versenkt";
+                        }
+                        else if (se22[4] == 0 && se22[5] == 0 && fGr >= 6)
+                        {
+                            tb_trefferg.Text = "Schiff 2.2 versenkt";
+                        }
+                        else if (se23[4] == 0 && se23[5] == 0 && fGr >= 8)
+                        {
+                            tb_trefferg.Text = "Schiff 2.3 versenkt";
+                        }
+
+                        else if (se31[6] == 0 && se31[7] == 0 && se31[8] == 0 && fGr >= 7)
+                        {
+                            tb_trefferg.Text = "Schiff 3.1 versenkt";
+                        }
+                        else if (se32[6] == 0 && se32[7] == 0 && se32[8] == 0 && fGr == 9)
+                        {
+                            tb_trefferg.Text = "Schiff 3.2 versenkt";
+                        }
+                        break;
+                }
+            }
+
             return 0;
         }
         private void schiff_versenkt()
@@ -1382,8 +1765,25 @@ namespace Battleship
             Random random = new Random();
             int schuss_x = random.Next(fGr);                     
             int schuss_y = random.Next(fGr);
-            int comp_zug = 1;
+            //int comp_zug = 1;
         
+        }
+
+        private void T_zug_Tick(object sender, EventArgs e)
+        {
+            while (start_zug == 0 || start_zug == 1)
+            {
+                if (start_zug == 0)
+                {
+                    rtb_status.Text = rtb_status.Text + "\nSie sind dran.";
+                    start_zug = 2;
+                }
+                else if (start_zug == 1)
+                {
+                    rtb_status.Text = rtb_status.Text + "\nComputer ist dran.";
+                    start_zug = computer_zug();
+                }
+            }
         }
     }
 }

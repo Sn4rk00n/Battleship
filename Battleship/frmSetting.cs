@@ -48,9 +48,9 @@ namespace Battleship
             string var = tb_breite.Text;
             int x = 0;
             Int32.TryParse(tb_breite.Text, out x);
-            if (x > 10)
+            if (x > 10 || x < 5)
             {
-                MessageBox.Show("Das Feld kann nur eine maximal Größe von 10x10 Feldern annehmen!");
+                MessageBox.Show("Das Feld kann nur eine Größe von 5x5 - 9x9 Feldern annehmen!");
                 tb_breite.Text = "";
             }
             lb_xbr.Text = "x " + tb_breite.Text;
