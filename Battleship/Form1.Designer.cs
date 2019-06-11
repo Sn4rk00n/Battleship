@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neuesSpielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zurücksetzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,11 +55,9 @@
             this.btn_ship3 = new System.Windows.Forms.Button();
             this.lb_s3counter = new System.Windows.Forms.Label();
             this.lb_s3text = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.gb_infop.SuspendLayout();
             this.gb_infog.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -79,7 +76,6 @@
             // 
             this.spielToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.neuesSpielToolStripMenuItem,
-            this.zurücksetzenToolStripMenuItem,
             this.beendenToolStripMenuItem});
             this.spielToolStripMenuItem.Name = "spielToolStripMenuItem";
             this.spielToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -91,12 +87,6 @@
             this.neuesSpielToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.neuesSpielToolStripMenuItem.Text = "Neues Spiel";
             this.neuesSpielToolStripMenuItem.Click += new System.EventHandler(this.NeuesSpielToolStripMenuItem_Click);
-            // 
-            // zurücksetzenToolStripMenuItem
-            // 
-            this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.zurücksetzenToolStripMenuItem.Text = "Zurücksetzen";
             // 
             // beendenToolStripMenuItem
             // 
@@ -229,6 +219,7 @@
             this.btn_start.TabIndex = 102;
             this.btn_start.Text = "Spiel starten";
             this.btn_start.UseVisualStyleBackColor = true;
+            this.btn_start.Click += new System.EventHandler(this.Btn_start_Click);
             // 
             // btn_ship1
             // 
@@ -265,7 +256,7 @@
             this.rtb_status.Location = new System.Drawing.Point(350, 40);
             this.rtb_status.Name = "rtb_status";
             this.rtb_status.ReadOnly = true;
-            this.rtb_status.Size = new System.Drawing.Size(300, 38);
+            this.rtb_status.Size = new System.Drawing.Size(300, 39);
             this.rtb_status.TabIndex = 107;
             this.rtb_status.TabStop = false;
             this.rtb_status.Text = "";
@@ -325,20 +316,11 @@
             this.lb_s3text.TabIndex = 113;
             this.lb_s3text.Text = "verfügbar";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(440, 94);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 114;
-            this.pictureBox1.TabStop = false;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 545);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lb_s3text);
             this.Controls.Add(this.rb_horizontal);
             this.Controls.Add(this.lb_s3counter);
@@ -362,13 +344,13 @@
             this.RightToLeftLayout = true;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Battleship";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gb_infop.ResumeLayout(false);
             this.gb_infop.PerformLayout();
             this.gb_infog.ResumeLayout(false);
             this.gb_infog.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,7 +361,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem spielToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neuesSpielToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zurücksetzenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem1;
@@ -404,7 +385,6 @@
         private System.Windows.Forms.Button btn_ship3;
         private System.Windows.Forms.Label lb_s3counter;
         private System.Windows.Forms.Label lb_s3text;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

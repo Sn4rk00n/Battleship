@@ -21,6 +21,19 @@ namespace Battleship
     {
 
         // Globale Startparameter
+        public int[] se11;
+        public int[] se12;
+        public int[] se13;
+        public int[] se14;
+
+        public int[] se21;
+        public int[] se22;
+        public int[] se23;
+
+        public int[] se31;
+        public int[] se32;
+
+
         public int[] s11;
         public int[] s12;
         public int[] s13;
@@ -65,13 +78,13 @@ namespace Battleship
         public frmMain()
         {
             InitializeComponent();
-            
+
         }
 
         //Erstellen einer neuen Runde
         private void NeuesSpielToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             setField();
             gb_infop.Enabled = true;
             gb_infog.Enabled = true;
@@ -100,23 +113,23 @@ namespace Battleship
 
             //Je nach Feldgröße werden entspreche viele Schiffe zur verfügung gestellt
             fGr = i;
-            Shipcount(fGr);
+
 
             // Anzahl Felder mit Feldgröße multiplizieren
             i = i * fieldsize + fieldtop;
-      
+
             // Initiallisierung des 2D Arrays für die Felder
             pbe = new PictureBox[i, i];
             pbg = new PictureBox[i, i];
-            
+
             //Zweifach verstrickte FOR-Schleife für die Erstellung der Felder mit ihren jeweiligen Events(Funktionen) und Eigenschaften
-            for (int y = fieldtop; y <= i - fieldsize; y += fieldsize)                  
+            for (int y = fieldtop; y <= i - fieldsize; y += fieldsize)
             {
-                for (int x = fieldleft; x <= i - fieldsize; x += fieldsize)            
+                for (int x = fieldleft; x <= i - fieldsize; x += fieldsize)
                 {
-                    pbe[x, y] = new PictureBox();                                        
-                    pbe[x, y].Name = "picbox_" + x.ToString() + "-" + y.ToString();
-                    pbe[x, y].Location = new Point(x, y); 
+                    pbe[x, y] = new PictureBox();
+                    pbe[x, y].Name = "picboxe_" + x.ToString() + "-" + y.ToString();
+                    pbe[x, y].Location = new Point(x, y);
                     pbe[x, y].Size = new Size(fieldsize, fieldsize);
                     pbe[x, y].BackColor = Color.DodgerBlue;
                     pbe[x, y].BorderStyle = BorderStyle.FixedSingle;
@@ -130,21 +143,23 @@ namespace Battleship
 
                     pbg[x, y] = new PictureBox();
                     pbg[x, y].Name = "picboxg_" + x.ToString() + "-" + y.ToString();
-                    pbg[x, y].Location = new Point(l-(x+fieldleft), y);
+                    pbg[x, y].Location = new Point(l - (x + fieldleft), y);
                     pbg[x, y].Size = new Size(fieldsize, fieldsize);
                     pbg[x, y].BackColor = Color.DodgerBlue;
                     pbg[x, y].BorderStyle = BorderStyle.FixedSingle;
                     pbg[x, y].Visible = true;
                     pbg[x, y].Click += new System.EventHandler(setShip_Click);
+
                     this.Controls.Add(pbg[x, y]);
                 }
             }
+            Shipcount(fGr);
         }
-        
+
         //Dynamische Anzahl der Schiffe für die jeweilige Feldgröße
-        private void Shipcount (int count)
+        private void Shipcount(int count)
         {
-            switch(count)
+            switch (count)
             {
                 case 5:
                     s1Count = 3;
@@ -157,6 +172,7 @@ namespace Battleship
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
+                    setEnemyShip();
                     break;
                 case 6:
                     s1Count = 3;
@@ -170,6 +186,7 @@ namespace Battleship
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
+                    setEnemyShip();
                     break;
                 case 7:
                     s1Count = 4;
@@ -185,6 +202,7 @@ namespace Battleship
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
+                    setEnemyShip();
                     break;
                 case 8:
                     s1Count = 4;
@@ -201,6 +219,7 @@ namespace Battleship
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
+                    setEnemyShip();
                     break;
                 case 9:
                     s1Count = 4;
@@ -218,6 +237,7 @@ namespace Battleship
                     lb_s1counter.Text = s1Count.ToString();
                     lb_s2counter.Text = s2Count.ToString();
                     lb_s3counter.Text = s3Count.ToString();
+                    setEnemyShip();
                     break;
             }
         }
@@ -239,7 +259,8 @@ namespace Battleship
             Int32.TryParse(strx, out xcoor);
             Int32.TryParse(stry, out ycoor);
 
-            if (shipsGone() == 0) { 
+            if (shipsGone() == 0 && gameState == 0)
+            {
                 if (picbox.BackColor != Color.Gray)
                 {
                     switch (currentShipLength)
@@ -327,6 +348,7 @@ namespace Battleship
                     }
                 }
             }
+            else if (gameState == 1) {  }
         }
 
         //Event wenn die Maus das Feld verlässt
@@ -345,7 +367,7 @@ namespace Battleship
             //rtb_status.Text = strx + stry;
             Int32.TryParse(strx, out xcoor);
             Int32.TryParse(stry, out ycoor);
-            if (shipsGone() == 0)
+            if (shipsGone() == 0 && gameState == 0)
             {
                 if (picbox.BackColor != Color.Gray)
                 {
@@ -436,6 +458,7 @@ namespace Battleship
                     }
                 }
             }
+            else if (gameState == 1) { }
         }
 
         //Event um ein Schiff zu setzen
@@ -463,9 +486,9 @@ namespace Battleship
                 var regexItem = new Regex("g");
                 if (regexItem.IsMatch(name))
                 {
-                    MessageBox.Show("Stop");
-                    rtb_status.Text = picbox.Name;
+                    rtb_status.Text = "Hier können keine Schiffe platziert werden. Nimm dein eigenes Feld.";
                 }
+
 
                 //Das setzen von 1-3er Schiffen
                 else
@@ -482,8 +505,8 @@ namespace Battleship
                                 if (check == 1) { rtb_status.Text = "Hier kann kein Schiff gesetzt werden!"; }
                                 else
                                 {
+                                    setArray(xcoor, ycoor, currentShipLength);
                                     picbox.BackColor = Color.Gray;
-                                    //genStruct(xcoor, ycoor, currentShipLength);
                                     s1Count--;
                                     lb_s1counter.Text = s1Count.ToString();
 
@@ -514,6 +537,7 @@ namespace Battleship
                                     }
                                     else
                                     {
+                                        setArray(xcoor, ycoor, currentShipLength);
                                         picbox.BackColor = Color.Gray;
                                         pbe[xcoor + fieldsize, ycoor].BackColor = Color.Gray;
                                         s2Count--;
@@ -535,6 +559,7 @@ namespace Battleship
                                     }
                                     else
                                     {
+                                        setArray(xcoor, ycoor, currentShipLength);
                                         picbox.BackColor = Color.Gray;
                                         pbe[xcoor, ycoor + fieldsize].BackColor = Color.Gray;
                                         s2Count--;
@@ -564,6 +589,7 @@ namespace Battleship
                                         }
                                         else
                                         {
+                                            setArray(xcoor, ycoor, currentShipLength);
                                             picbox.BackColor = Color.Gray;
                                             pbe[xcoor + fieldsize, ycoor].BackColor = Color.Gray;
                                             pbe[xcoor + (2 * fieldsize), ycoor].BackColor = Color.Gray;
@@ -588,6 +614,7 @@ namespace Battleship
                                         }
                                         else
                                         {
+                                            setArray(xcoor, ycoor, currentShipLength);
                                             picbox.BackColor = Color.Gray;
                                             pbe[xcoor, ycoor + fieldsize].BackColor = Color.Gray;
                                             pbe[xcoor, ycoor + (2 * fieldsize)].BackColor = Color.Gray;
@@ -611,6 +638,343 @@ namespace Battleship
                     }
                 }
             }
+            else if (gameState == 1)
+            {
+                var regexItem = new Regex("e");
+                if (regexItem.IsMatch(name))
+                {
+                    rtb_status.Text = "Auf dieses Feld kannst du nicht schießen.";
+                }
+            }
+        }
+
+        private void setArray(int x, int y,int length)
+        {
+            switch (s1Count)
+            {
+                case 4:
+                    se11 = new int[2];
+                    break;
+            }
+        }
+
+        private void setEnemyShip()
+        {
+            int Ship1Count = s1Count;
+            int Ship2Count = s2Count;
+            int Ship3Count = s3Count;
+            int numx = new int();
+            int numy = new int();
+            int vh = 0;
+            int check = 0;
+            int free = 0;
+            Random random = new Random();
+
+            while (Ship1Count != 0)
+            {
+
+                while (check == 0)
+                {
+                    numx = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    numy = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    vh = random.Next(1);
+                    if (pbg[numx, numy].BackColor != Color.Gray)
+                    {
+                        free = checkShipEnemy(numx, numy, 1, vh);
+                        if (free == 1)
+                        {
+                            rtb_status.Text = rtb_status.Text + "\nNope";
+                        }
+                        else
+                        {
+                            pbg[numx, numy].BackColor = Color.Gray;
+                            check = 1;
+                        }
+
+                    }
+                    else { check = 0; }
+                }
+                switch (Ship1Count)
+                {
+                    case 1:
+                        s11[0] = numx;
+                        s11[1] = numy;
+                        pbg[s11[0], s11[1]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+                    case 2:
+                        s12[0] = numx;
+                        s12[1] = numy;
+                        pbg[s12[0], s12[1]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+                    case 3:
+                        s13[0] = numx;
+                        s13[1] = numy;
+                        pbg[s13[0], s13[1]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+                    case 4:
+                        s14[0] = numx;
+                        s14[1] = numy;
+                        pbg[s14[0], s14[1]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+
+                    default:
+                        check = 0;
+                        break;
+
+                }
+
+                Ship1Count--;
+            }
+
+            while (Ship2Count != 0)
+            {
+
+                while (check == 0)
+                {
+                    numx = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    numy = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    vh = random.Next(2); //=1=Vertical
+                                         //vh = 1;
+
+                    if (pbg[numx, numy].BackColor != Color.Gray)
+                    {
+                        if (vh == 0) //horizontal
+                        {
+                            if ((numx + fieldsize) <= xmax)
+                            {
+                                free = checkShipEnemy(numx, numy, 2, vh);
+
+                                if (free == 1)
+                                {
+                                    rtb_status.Text = rtb_status.Text + "\nNope2";
+                                }
+                                else
+                                {
+                                    pbg[numx, numy].BackColor = Color.Gray;
+                                    pbg[numx + fieldsize, numy].BackColor = Color.Gray;
+                                    check = 1;
+                                }
+                            }
+                            else { }
+                        }
+
+
+                        else if (vh == 1)//vertical
+                        {
+                            if ((numy + fieldsize) <= ymax)
+                            {
+                                free = checkShipEnemy(numx, numy, 2, vh);
+
+                                if (free == 1)
+                                {
+                                    rtb_status.Text = rtb_status.Text + "\nNope2";
+                                }
+                                else
+                                {
+                                    pbg[numx, numy].BackColor = Color.Gray;
+                                    pbg[numx, numy + fieldsize].BackColor = Color.Gray;
+                                    check = 1;
+                                }
+                            }
+                            else { }
+                        }
+
+                    }
+                    else { check = 0; }
+                }
+
+                switch (Ship2Count)
+                {
+                    case 1:
+                        if (vh == 0) //horizontal
+                        {
+                            s21[0] = numx;
+                            s21[1] = numy;
+                            s21[2] = numx + fieldsize;
+                            s21[3] = numy;
+                        }
+                        else if (vh == 1)
+                        {
+                            s21[0] = numx;
+                            s21[1] = numy;
+                            s21[2] = numx;
+                            s21[3] = numy + fieldsize;
+                        }
+                        pbg[s21[0], s21[1]].BackColor = Color.DodgerBlue;
+                        pbg[s21[2], s21[3]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+
+                    case 2:
+                        if (vh == 0) //horizontal
+                        {
+                            s22[0] = numx;
+                            s22[1] = numy;
+                            s22[2] = numx + fieldsize;
+                            s22[3] = numy;
+                        }
+                        else if (vh == 1)
+                        {
+                            s22[0] = numx;
+                            s22[1] = numy;
+                            s22[2] = numx;
+                            s22[3] = numy + fieldsize;
+                        }
+                        pbg[s22[0], s22[1]].BackColor = Color.DodgerBlue;
+                        pbg[s22[2], s22[3]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+
+                    case 3:
+                        if (vh == 0) //horizontal
+                        {
+                            s23[0] = numx;
+                            s23[1] = numy;
+                            s23[2] = numx + fieldsize;
+                            s23[3] = numy;
+                        }
+                        else if (vh == 1)
+                        {
+                            s23[0] = numx;
+                            s23[1] = numy;
+                            s23[2] = numx;
+                            s23[3] = numy + fieldsize;
+                        }
+                        pbg[s23[0], s23[1]].BackColor = Color.DodgerBlue;
+                        pbg[s23[2], s23[3]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+                }
+                Ship2Count--;
+            }
+
+            while (Ship3Count != 0)
+            {
+                while (check == 0)
+                {
+                    numx = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    numy = random.Next(fGr) * fieldsize + fieldtop; //0 bis Feldgröße-1 Beispiel Feldgröße= 7 (0-6)
+                    vh = random.Next(2);
+
+                    if (pbg[numx, numy].BackColor != Color.Gray)
+                    {
+                        if (vh == 0) //horizontal
+                        {
+                            if (numx + (fieldsize * 2) <= xmax)
+                            {
+                                if ((numx + fieldsize) <= xmax)
+                                {
+                                    free = checkShipEnemy(numx, numy, 3, vh);
+
+                                    if (free == 1)
+                                    {
+                                        rtb_status.Text = rtb_status.Text + "\nNope3.1";
+                                    }
+                                    else
+                                    {
+                                        pbg[numx, numy].BackColor = Color.Gray;
+                                        pbg[numx + fieldsize, numy].BackColor = Color.Gray;
+                                        pbg[numx + (fieldsize * 2), numy].BackColor = Color.Gray;
+                                        check = 1;
+                                    }
+                                }
+
+                            }
+                            else { }
+
+
+                        }
+
+
+                        else if (vh == 1)//vertical
+                        {
+                            if (numy + (fieldsize * 2) <= ymax)
+                            {
+                                if (numy + fieldsize <= ymax)
+                                {
+                                    free = checkShipEnemy(numx, numy, 3, vh);
+
+                                    if (free == 1)
+                                    {
+                                        rtb_status.Text = rtb_status.Text + "\nNope3.2";
+                                    }
+                                    else
+                                    {
+                                        pbg[numx, numy].BackColor = Color.Gray;
+                                        pbg[numx, numy + fieldsize].BackColor = Color.Gray;
+                                        pbg[numx, numy + (fieldsize * 2)].BackColor = Color.Gray;
+                                        check = 1;
+                                    }
+                                }
+                                else { }
+                            }
+                        }
+
+                    }
+                    else { check = 0; }
+                }
+
+                switch (Ship3Count)
+                {
+                    case 1:
+                        if (vh == 0)
+                        {
+                            s31[0] = numx;
+                            s31[1] = numy;
+                            s31[2] = numx + fieldsize;
+                            s31[3] = numy;
+                            s31[4] = numx + (fieldsize * 2);
+                            s31[5] = numy;
+                        }
+                        else if (vh == 1)
+                        {
+                            s31[0] = numx;
+                            s31[1] = numy;
+                            s31[2] = numx;
+                            s31[3] = numy + fieldsize;
+                            s31[4] = numx;
+                            s31[5] = numy + (fieldsize * 2);
+                        }
+                        pbg[s31[0], s31[1]].BackColor = Color.DodgerBlue;
+                        pbg[s31[2], s31[3]].BackColor = Color.DodgerBlue;
+                        pbg[s31[4], s31[5]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+                    case 2:
+                        if (vh == 0)
+                        {
+                            s32[0] = numx;
+                            s32[1] = numy;
+                            s32[2] = numx + fieldsize;
+                            s32[3] = numy;
+                            s32[4] = numx + (fieldsize * 2);
+                            s32[5] = numy;
+                        }
+                        else if (vh == 1)
+                        {
+                            s32[0] = numx;
+                            s32[1] = numy;
+                            s32[2] = numx;
+                            s32[3] = numy + fieldsize;
+                            s32[4] = numx;
+                            s32[5] = numy + (fieldsize * 2);
+                        }
+                        pbg[s32[0], s32[1]].BackColor = Color.DodgerBlue;
+                        pbg[s32[2], s32[3]].BackColor = Color.DodgerBlue;
+                        pbg[s32[4], s32[5]].BackColor = Color.DodgerBlue;
+                        check = 0;
+                        break;
+
+                }
+
+                Ship3Count--;
+            }
+
+            //rtb_status.Text = s32[0].ToString()+ "-" + s32[1].ToString() + "_" + s32[2].ToString() + "-" + s32[3].ToString() + "_" + s32[4].ToString() + "-" + s32[5].ToString();
         }
 
         private int shipsGone()
@@ -618,29 +982,30 @@ namespace Battleship
             if (s1Count == 0 && s2Count == 0 && s3Count == 0)
             {
                 rtb_status.Text = "Alle Schiffe sind gesetzt, bitte starte das Spiel.";
-                gameState = 1;
+
                 return 1;
             }
             else { return 0; }
         }
 
-        private int checkShip(int x, int y,int lenght)
+        private int checkShip(int x, int y, int lenght)
         {
             //X/Y = Koordinaten vom angeklickten Objekt
-            int check;
+            int check = new int();
 
             switch (lenght)
             {
                 case 1:
                     check = fieldCheck(x, y);
-                    if(check == 1)
+
+                    if (check == 1)
                     {
                         return 1;
                     }
                     break;
                 case 2:
                     check = fieldCheck(x, y);
-                    if(check == 1)
+                    if (check == 1)
                     {
                         return 1;
                     }
@@ -651,7 +1016,7 @@ namespace Battleship
                         else { return 0; }
                     }
 
-                    else if(rb_vertical.Checked && check == 0)
+                    else if (rb_vertical.Checked && check == 0)
                     {
                         check = fieldCheck(x, y + fieldsize);
                         if (check == 1) { return 1; }
@@ -674,7 +1039,7 @@ namespace Battleship
                             if (check == 1) { return 1; }
                             else { return 0; }
                         }
-                        
+
                     }
                     else if (rb_vertical.Checked && check == 0)
                     {
@@ -692,11 +1057,81 @@ namespace Battleship
             return 0;
         }
 
+        private int checkShipEnemy(int x, int y, int lenght, int vh)
+        {
+            //X/Y = Koordinaten vom angeklickten Objekt
+            int check;
+
+            switch (lenght)
+            {
+                case 1:
+                    check = fieldCheckEnemy(x, y);
+
+                    if (check == 1)
+                    {
+                        return 1;
+                    }
+                    break;
+                case 2:
+                    check = fieldCheckEnemy(x, y);
+                    if (check == 1)
+                    {
+                        return 1;
+                    }
+                    else if (vh == 0 && check == 0)
+                    {
+                        check = fieldCheckEnemy(x + fieldsize, y);
+                        if (check == 1) { return 1; }
+                        else { return 0; }
+                    }
+
+                    else if (vh == 1 && check == 0)
+                    {
+                        check = fieldCheckEnemy(x, y + fieldsize);
+                        if (check == 1) { return 1; }
+                        else { return 0; }
+                    }
+                    break;
+                case 3:
+                    check = fieldCheckEnemy(x, y);
+                    if (check == 1)
+                    {
+                        return 1;
+                    }
+                    else if (vh == 0 && check == 0)
+                    {
+                        check = fieldCheckEnemy(x + fieldsize, y);
+                        if (check == 1) { return 1; }
+                        else if (check == 0)
+                        {
+                            check = fieldCheckEnemy(x + (2 * fieldsize), y);
+                            if (check == 1) { return 1; }
+                            else { return 0; }
+                        }
+
+                    }
+                    else if (vh == 1 && check == 0)
+                    {
+                        check = fieldCheckEnemy(x, y + fieldsize);
+                        if (check == 1) { return 1; }
+                        else if (check == 0)
+                        {
+                            check = fieldCheckEnemy(x, y + (2 * fieldsize));
+                            if (check == 1) { return 1; }
+                            else { return 0; }
+                        }
+                    }
+                    break;
+            }
+            return 0;
+        }
+
+
         private int fieldCheck(int x, int y)
         {
             if (x - fieldsize < xmin && y - fieldsize < ymin) //Ecke obenlinks
             {
-                if(pbe[x+fieldsize,y].BackColor == Color.Gray || pbe[x,y+fieldsize].BackColor == Color.Gray)
+                if (pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
@@ -704,7 +1139,7 @@ namespace Battleship
             }
             else if (x + fieldsize > xmax && y - fieldsize < ymin) //Ecke oben rechts
             {
-                if(pbe[x-fieldsize,y].BackColor == Color.Gray || pbe[x,y+fieldsize].BackColor == Color.Gray)
+                if (pbe[x - fieldsize, y].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
@@ -712,37 +1147,37 @@ namespace Battleship
             }
             else if (x - fieldsize < xmin && y + fieldsize > ymax) //Unterelinke Ecke
             {
-                if(pbe[x+fieldsize,y].BackColor == Color.Gray || pbe[x,y-fieldsize].BackColor == Color.Gray)
+                if (pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y - fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
                 else { return 0; }
             }
-            else if(x + fieldsize > xmax && y + fieldsize > ymax) //Untererechte Ecke
+            else if (x + fieldsize > xmax && y + fieldsize > ymax) //Untererechte Ecke
             {
-                if(pbe[x-fieldsize,y].BackColor == Color.Gray || pbe[x,y-fieldsize].BackColor == Color.Gray)
+                if (pbe[x - fieldsize, y].BackColor == Color.Gray || pbe[x, y - fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
                 else { return 0; }
             }
-            else if (y-fieldsize < ymin) //obere Reihe
+            else if (y - fieldsize < ymin) //obere Reihe
             {
-                if(pbe[x-fieldsize,y].BackColor == Color.Gray || pbe[x+fieldsize,y].BackColor == Color.Gray || pbe[x,y+fieldsize].BackColor == Color.Gray)
+                if (pbe[x - fieldsize, y].BackColor == Color.Gray || pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
                 else { return 0; }
             }
-            else if (x-fieldsize < xmin) //linke Reihe
+            else if (x - fieldsize < xmin) //linke Reihe
             {
-                if(pbe[x+fieldsize,y].BackColor == Color.Gray || pbe[x,y-fieldsize].BackColor == Color.Gray || pbe[x,y+fieldsize].BackColor == Color.Gray)
+                if (pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y - fieldsize].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
                 {
                     return 1;
                 }
                 else { return 0; }
             }
-            else if (x+fieldsize > xmax) //rechte Reihe
+            else if (x + fieldsize > xmax) //rechte Reihe
             {
                 if (pbe[x - fieldsize, y].BackColor == Color.Gray || pbe[x, y - fieldsize].BackColor == Color.Gray || pbe[x, y + fieldsize].BackColor == Color.Gray)
                 {
@@ -750,7 +1185,7 @@ namespace Battleship
                 }
                 else { return 0; }
             }
-            else if (y+fieldsize > ymax) //untere Reihe
+            else if (y + fieldsize > ymax) //untere Reihe
             {
                 if (pbe[x - fieldsize, y].BackColor == Color.Gray || pbe[x + fieldsize, y].BackColor == Color.Gray || pbe[x, y - fieldsize].BackColor == Color.Gray)
                 {
@@ -766,7 +1201,85 @@ namespace Battleship
                 }
                 else { return 0; }
             }
-            
+
+        }
+
+
+        private int fieldCheckEnemy(int x, int y)
+        {
+            if (x - fieldsize < xmin && y - fieldsize < ymin) //Ecke obenrechts
+            {
+                if (pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (x + fieldsize > xmax && y - fieldsize < ymin) //Ecke oben links
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (x - fieldsize < xmin && y + fieldsize > ymax) //Untererechte Ecke
+            {
+                if (pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (x + fieldsize > xmax && y + fieldsize > ymax) //Unterelinke Ecke
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (y - fieldsize < ymin) //obere Reihe
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (x - fieldsize < xmin) //rechte Reihe
+            {
+                if (pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (x + fieldsize > xmax) //linke Reihe
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else if (y + fieldsize > ymax) //untere Reihe
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+            else //Mittleres Feld
+            {
+                if (pbg[x - fieldsize, y].BackColor != Color.DodgerBlue || pbg[x + fieldsize, y].BackColor != Color.DodgerBlue || pbg[x, y - fieldsize].BackColor != Color.DodgerBlue || pbg[x, y + fieldsize].BackColor != Color.DodgerBlue)
+                {
+                    return 1;
+                }
+                else { return 0; }
+            }
+
         }
 
         private void BeendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -798,6 +1311,79 @@ namespace Battleship
         {
             rtb_status.Text = "3. Schiff mit einer Länge von 3 Feldern gewählt.";
             currentShipLength = 3;
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_start_Click(object sender, EventArgs e)
+        {
+            gameState = 1;
+
+            Random random = new Random();
+            int start_zug = random.Next(2);
+
+            while(start_zug == 0 || start_zug == 1)
+            { 
+                if (start_zug == 0)
+                {
+                    //func spieler_zug();
+                }
+                else if (start_zug == 1)
+                {
+                    computer_zug();
+                }
+            }
+
+        }
+
+        private int computer_zug()
+        {
+            int comp_zug = 1;
+            Random random = new Random();
+
+            while (comp_zug == 1)
+            {
+                int schuss_x = random.Next(fGr) * fieldsize + fieldtop;                       //Nimmt eine Randomzahl anhand der Größe des Spielfeldes 
+                int schuss_y = random.Next(fGr) * fieldsize + fieldtop;                       //so wird bestimmt wo hingeschossen wird
+
+                if (pbe[schuss_x, schuss_y].BackColor == Color.DodgerBlue)        //Kein Treffer
+                {
+                    comp_zug = 0;  
+                }
+                else if (pbe[schuss_x, schuss_y].BackColor == Color.Gray)   //Treffer
+                {
+                    Arraywert des getroffenen Schiffes ändern                   //Überprüfen welches Schiff getroffen wurde
+
+
+                    if (schiff_2er[2] == 1, 0 || schiff_2er[2] = 0, 1)	//Schiff der Größe 2 getroffen und Funktionsaufruf
+			        {   //pbe[100,100 - 100,125] se21[2] = 1,1 | se21[0]= 0 -> pbe[100,100] - se21[1] -> pbe[100,125]
+                        func 2er_schiff_getroffen();
+                    }
+
+                    else if (schiff_3er[3] == 1, 1, 0 || schiff_3er[3] == 1, 0, 1 || schiff_3er[3] == 0, 1, 1 || schiff_3er[3] == 1, 0, 0 || schiff_3er[3] == 0, 1, 0 || schiff_3er[3] == 0, 0, 1 )
+			        {
+                        func 3er_schiff_getroffen();                //Schiff der Größe 3 getroffen und Funktionsaufruf
+                    }
+
+                    else if (schiff_1er[1] == 0 || schiff_2er[2] == 0, 0 || schiff_3er[3] == 0, 0, 0 )
+			        {
+                        func schiff_versenkt();                         // Ein Schiff wurde versenkt
+                    }
+                }
+               
+            }
+            return 0;
+        }
+        private void schiff_versenkt()
+        {
+            Random random = new Random();
+            int schuss_x = random.Next(fGr);                     
+            int schuss_y = random.Next(fGr);
+            int comp_zug = 1;
+        
         }
     }
 }
