@@ -15,12 +15,12 @@ using System.Text.RegularExpressions;
 
 namespace Battleship
 {
-
-
     public partial class frmMain : Form
     {
-        public int start_zug = 0;
         // Globale Startparameter
+        public int start_zug = 0;
+         
+        //Arrays für eigene Schiffe
         public int[] se11;
         public int[] se12;
         public int[] se13;
@@ -33,7 +33,7 @@ namespace Battleship
         public int[] se31;
         public int[] se32;
 
-
+        //Arrays für gegenerische Schiffe
         public int[] s11;
         public int[] s12;
         public int[] s13;
@@ -48,7 +48,7 @@ namespace Battleship
 
         public int gameState = 0;   //GameState: 0=Setzen 1=Spiel starten
 
-        public int[,] alrdyShot;
+        public int[,] alrdyShot; //Array damit der Computer sich merken kann, wohin der schon geschossen hat
 
         //Difinitions Integer für Feld- Position, Größe und Erscheinungsbild
         public int fieldtop = 50;
@@ -160,7 +160,7 @@ namespace Battleship
             Shipcount(fGr);
         }
 
-        //Dynamische Anzahl der Schiffe für die jeweilige Feldgröße
+        //Dynamische Anzahl der Schiffe für die jeweilige Feldgröße +  Initiallisierung der Schiff Arrays vom Computer
         private void Shipcount(int count)
         {
             switch (count)
@@ -652,7 +652,7 @@ namespace Battleship
                 }
             }
         }
-
+        //Abspeichern von den gesetzten Schiffe in die Arrays
         private void setArray(int x, int y,int length)
         {
             switch (s1Count)
@@ -802,7 +802,7 @@ namespace Battleship
                     break;
             }
         }
-
+        //Schiffsetzung vom Gegner
         private void setEnemyShip()
         {
             int Ship1Count = s1Count;
@@ -1132,7 +1132,7 @@ namespace Battleship
 
             //rtb_status.Text = s32[0].ToString()+ "-" + s32[1].ToString() + "_" + s32[2].ToString() + "-" + s32[3].ToString() + "_" + s32[4].ToString() + "-" + s32[5].ToString();
         }
-
+        //Ábfrage ob alle Schiffe gesetz werden.
         private int shipsGone()
         {
             if (s1Count == 0 && s2Count == 0 && s3Count == 0)
@@ -1143,7 +1143,7 @@ namespace Battleship
             }
             else { return 0; }
         }
-
+        //Funktion um eine Abfrage zu bilden ob an der geklickten Position das Schiff platziert werden kann | Ist neben an ein Schiff?
         private int checkShip(int x, int y, int lenght)
         {
             //X/Y = Koordinaten vom angeklickten Objekt
@@ -1212,7 +1212,7 @@ namespace Battleship
             }
             return 0;
         }
-
+        //Funktion um eine Abfrage zu bilden ob an der geklickten Position das Schiff platziert werden kann | Ist neben an ein Schiff?
         private int checkShipEnemy(int x, int y, int lenght, int vh)
         {
             //X/Y = Koordinaten vom angeklickten Objekt
@@ -1282,7 +1282,7 @@ namespace Battleship
             return 0;
         }
 
-
+        //Funktion um eine Abfrage zu bilden ob an der geklickten Position das Schiff platziert werden kann | Ist neben an ein Schiff?
         private int fieldCheck(int x, int y,int hit)
         {
             if (x - fieldsize < xmin && y - fieldsize < ymin) //Ecke obenlinks
@@ -1360,7 +1360,7 @@ namespace Battleship
 
         }
 
-
+        //Funktion um eine Abfrage zu bilden ob an der geklickten Position das Schiff platziert werden kann | Ist neben an ein Schiff?
         private int fieldCheckEnemy(int x, int y)
         {
             if (x - fieldsize < xmin && y - fieldsize < ymin) //Ecke obenrechts
@@ -1456,10 +1456,8 @@ namespace Battleship
 
         private void Btn_ship2_Click(object sender, EventArgs e)
         {
-            // Message Bitte erstes Feld für dein Schiff auswählen
-            rtb_status.Text = "2. Schiff mit einer Länge von 2 Feldern gewählt.";
 
-            // currentshiplength setzen
+            rtb_status.Text = "2. Schiff mit einer Länge von 2 Feldern gewählt.";
             currentShipLength = 2;
         }
 
@@ -1473,18 +1471,18 @@ namespace Battleship
         {
 
         }
-
+        //Starten des Spiels + Wer anfängt
         private void Btn_start_Click(object sender, EventArgs e)
         {
             gameState = 1;
 
-            //Random random = new Random();
-            //start_zug = random.Next(2);
-            start_zug = 0;
+            Random random = new Random();         
+            start_zug = random.Next(2);
+            
             t_zug.Enabled = true;
 
         }
-
+        //Wenn der Computer am zug ist
         private int computer_zug()
         {
             int comp_zug = 1;
@@ -1511,32 +1509,6 @@ namespace Battleship
                     {
                         rückgabe = checkArray(schuss_x, schuss_y, 1);
 
-                        /*switch (rückgabe)
-                        {
-                            case 11:
-                                tb_trefferg.Text = "1er Schiff versenkt";
-                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
-                                break;
-                            case 12:
-                                tb_trefferg.Text = "1er Schiff versenkt";
-                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
-                                break;
-                            case 13:
-                                tb_trefferg.Text = "1er Schiff versenkt";
-                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
-                                break;
-                            case 14:
-                                tb_trefferg.Text = "1er Schiff versenkt";
-                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
-                                break;
-                            case 21.1-31.3:
-                                pbe[schuss_x, schuss_y].BackColor = Color.Red;
-                                oldx = schuss_x;
-                                oldy = schuss_y;
-                                rückgabe = checkArray(schuss_x, schuss_y, 2);
-                                break;
-                        }
-                        */
                         if (rückgabe >= 11 && rückgabe <= 14)
                         {
                             tb_trefferg.Text = "1er Schiff versenkt";
@@ -1552,12 +1524,12 @@ namespace Battleship
                         }
                     }
                 }
-                else if (shot == 1) { rtb_status.Text = rtb_status.Text + "\nBereits geschossen"; }
+               // else if (shot == 1) { rtb_status.Text = rtb_status.Text + "\nBereits geschossen"; }
                 
             }
             return 0;
         }
-
+        //Funktion zur Registireung ob das gewählte Feld vom Computer schon beschossen wurde
         private int alreadyShot(int x,int y)
         {
             for (int i = fieldtop;i <= ymax - fieldsize; i += fieldsize)
@@ -1574,7 +1546,7 @@ namespace Battleship
             }
             return 0;
         }
-
+        //Welches Schiff wurde getroffen, ist es versenkt wurden?
         private double checkArray(int x,int y, int hits) //hits: 1=treffer 2=versenkt?
         {
             if (hits == 1)
@@ -1760,15 +1732,15 @@ namespace Battleship
 
             return 0;
         }
-        private void schiff_versenkt()
+        /*private void schiff_versenkt()
         {
             Random random = new Random();
             int schuss_x = random.Next(fGr);                     
             int schuss_y = random.Next(fGr);
             //int comp_zug = 1;
         
-        }
-
+        }*/
+         //Timer zur abfrage wer an der Reihe ist
         private void T_zug_Tick(object sender, EventArgs e)
         {
             while (start_zug == 0 || start_zug == 1)
